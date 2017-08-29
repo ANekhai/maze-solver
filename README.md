@@ -7,7 +7,7 @@ This is a program to solve pixel mazes. It is written in C++ using openCV. Mazes
 * Implement more algorithms (high priority)
   * Breadth First Search
   * Dijkstra's Algorithm
-  * A*
+  * A* search Algorithm
 * Better command line parsing (medium priority)
   * include file system operations
   * include an option to run all the algorithms
