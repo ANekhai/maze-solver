@@ -1,9 +1,9 @@
 #include "maze.h"
 #include <opencv2/opencv.hpp>
 #include <list>
-#include <iostream>
+#include <string>
 #include <deque>
-#include <iostream>
+#include <utility>
 
 
 //Empty constructor does nothing
@@ -260,8 +260,8 @@ Maze::Maze(cv::Mat& I){
 void Maze::printSolution(){
 	std::cout << "SOLUTION:" << std::endl;
 
-	std::list<Node*>::reverse_iterator itr = solution.rbegin();
-	for (; itr != solution.rend(); ++itr){
+	std::list<Node*>::reverse_iterator itr;
+	for (itr = solution.rbegin(); itr != solution.rend(); ++itr){
 		std::cout << (*itr)->i << ", " << (*itr)->j << std::endl;
 	}
 }
@@ -330,12 +330,33 @@ void DFS::solveMaze(Node* ptr, bool& flag){
 		if(!ptr->up_->visited_)solveMaze(ptr->up_, flag);
 	}
 
-
 	if(flag){
 		solution.push_back(ptr);
 	}
 }
-
+/*
 void BFS::solveMaze(){
+	Node* ptr = getSource(), next;
+	std::deque<std::pair<Node*, std::string> > queue;
+	solution.push_back(ptr);
+	std::pair<Node*, std::string> curr_path, next_path;
 
-}
+	//Add source node to queue
+	curr_path.first = ptr; curr_path.second = "";
+	queue.push_back(curr_path);
+
+	while(!ptr->sink_){
+		if(queue.size() == 0){
+			std::cerr << "NO SOLUTION FOUND" << std::endl;
+			exit(1);
+		}
+
+		//pop first element and update current node
+
+		//add all unvisited nodes to queue
+
+		break;
+	}
+
+
+}*/
