@@ -6,8 +6,10 @@ Mazes are passed in as black and white bitmap files, where the black pixels are 
 
 ## TODO
 * Implement more algorithms (high priority)
-  * Breadth First Search
   * Dijkstra's Algorithm
+    * Binary Heap
+    * Fibonacci Heap
+    * Parallelized
   * A* search Algorithm
 * Better command line parsing (medium priority)
   * include file system operations
