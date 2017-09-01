@@ -334,12 +334,28 @@ void DFS::solveMaze(Node* ptr, bool& flag){
 		solution.push_back(ptr);
 	}
 }
-/*
+
+std::pair<Node*, std::string> updatePath(std::pair<Node*, std::string> prev, Node* next, char dir){
+	prev.first = next;
+	if(dir == 'U'){
+		prev.second += "U";
+	}else if(dir == 'D'){
+		prev.second += "D";
+	}else if(dir == 'L'){
+		prev.second += "L";
+	}else if(dir == 'R'){
+		prev.second += "R";
+	}
+
+	return prev;
+}
+
+
 void BFS::solveMaze(){
 	Node* ptr = getSource(), next;
 	std::deque<std::pair<Node*, std::string> > queue;
 	solution.push_back(ptr);
-	std::pair<Node*, std::string> curr_path, next_path;
+	std::pair<Node*, std::string> curr_path;
 
 	//Add source node to queue
 	curr_path.first = ptr; curr_path.second = "";
@@ -352,11 +368,43 @@ void BFS::solveMaze(){
 		}
 
 		//pop first element and update current node
+		curr_path = queue.front();
+		queue.pop_front();
+		ptr = curr_path.first; ptr->visited_ = true;
 
 		//add all unvisited nodes to queue
+		if(ptr->up_){
+			if(!ptr->up_->visited_){
+				ptr->up_->visited_ = true;
+				queue.push_back(updatePath(curr_path, ptr->up_, 'U'));
+			}
+		}if(ptr->left_){
+			if(!ptr->left_->visited_){ 
+				ptr->left_->visited_ = true;
+				queue.push_back(updatePath(curr_path, ptr->left_, 'L'));
+			}
+		}if(ptr->right_){
+			if(!ptr->right_->visited_){
+				ptr->right_->visited_ = true;
+				queue.push_back(updatePath(curr_path, ptr->right_, 'R'));
+			}
+		}if(ptr->down_){
+			if(!ptr->down_->visited_){
+				ptr->down_->visited_ = true;
+				queue.push_back(updatePath(curr_path, ptr->down_, 'D'));
+			}
+		}
 
-		break;
 	}
 
+	//convert path string to solution
+	ptr = getSource();
+	for(unsigned int i =0; i < curr_path.second.length(); ++i){
+		if(curr_path.second[i] == 'U') ptr = ptr->up_;
+		else if(curr_path.second[i] == 'L') ptr = ptr->left_;
+		else if(curr_path.second[i] == 'R') ptr = ptr->right_;
+		else ptr = ptr->down_;
+		solution.push_back(ptr);
+	}
 
-}*/
+}
