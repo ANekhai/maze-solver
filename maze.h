@@ -64,4 +64,18 @@ public:
 	void solveMaze();
 };
 
+
+class Dijkstra : public Maze{
+public:
+	Dijkstra(cv::Mat& I) : Maze(I) {}
+	void solveMaze();
+
+};
+
+class Astar : public Maze{
+public:
+	Astar(cv::Mat& I) : Maze(I) {}
+	void solveMaze();
+};
+
 #endif		/* _maze_h_ */
